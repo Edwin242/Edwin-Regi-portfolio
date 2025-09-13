@@ -1,14 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Play } from 'lucide-react';
+import { ExternalLink, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import trafficImg from "@/assets/projects/sydney-traffic.png";
 import volunteerImg from "@/assets/projects/volunteer-app.png";
-import fringeImg from "@/assets/projects/adelaide-fringe.png"; // NEW
-import placeholderImg from "@/assets/projects/placeholder.jpg";
+import fringeImg from "@/assets/projects/adelaide-fringe.png";
+
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1572177812156-58036aae439c?q=80&w=1200&auto=format";
 
 const Projects = () => {
   const projects = [
@@ -39,7 +40,7 @@ const Projects = () => {
       contribution: "Database schema design input, admin dashboard UI, component refactors, code reviews, sprint demos",
       learning: "Agile teamwork, Git workflows, pull request etiquette, component composition, stakeholder presentations",
       isGroupProject: true,
-      image: fringeImg,                        // UPDATED
+      image: fringeImg,
       imageAlt: "Adelaide Fringe booking UI preview"
     },
     {
@@ -49,7 +50,7 @@ const Projects = () => {
       contribution: "Full development, game design, interactive elements, skill showcases",
       learning: "Game development, interactive storytelling, creative portfolio presentation",
       isComingSoon: true,
-      image: placeholderImg,
+      // image omitted so FALLBACK_IMG is used
       imageAlt: "Gamified CV preview"
     }
   ];
@@ -87,9 +88,9 @@ const Projects = () => {
                     <img
                       className="w-full aspect-[16/9] object-cover"
                       alt={project.imageAlt || `${project.title} preview`}
-                      src={project.image || placeholderImg}
+                      src={project.image || FALLBACK_IMG}
                       loading="lazy"
-                      onError={(e) => { e.currentTarget.src = placeholderImg; }}
+                      onError={(e) => { e.currentTarget.src = FALLBACK_IMG; }}
                     />
 
                     {project.isComingSoon && (
